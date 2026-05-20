@@ -40,7 +40,7 @@ const GeminiWorkflowApp = () => {
             'Failed SNOL deliveries, causing delays in case initiation',
           ],
           supportChannels: ['email'],
-          channelDescription: 'SNOL documents sent via email to employers',
+          channelDescription: 'Contact is maintained exclusively through SNOL documents sent via email to employers.',
         },
         {
           id: 'rr',
@@ -59,7 +59,7 @@ const GeminiWorkflowApp = () => {
             'Inconsistent document formats and missing documentation from providers',
           ],
           supportChannels: ['outbound', 'inbound'],
-          channelDescription: '80% outbound calls to medical centers, pharmacies, workplaces. Inbound calls from locations with questions about document submission.',
+          channelDescription: '80% outbound calls to locations: medical centers, pharmacies, and IW workplaces (restaurants, etc.). Inbound calls from locations with questions about document submission — where to send records, why they are required, and how to submit them.',
         },
         {
           id: 'edr',
@@ -75,7 +75,7 @@ const GeminiWorkflowApp = () => {
           kpi: '> 35 cases processed per day',
           bottlenecks: [],
           supportChannels: ['outbound'],
-          channelDescription: 'Outbound calls to insurance carriers regarding copy fee invoices.',
+          channelDescription: 'Outbound calls to insurance carriers to send and follow up on copy service fee invoices.',
         },
         {
           id: 'rrv',
@@ -94,7 +94,7 @@ const GeminiWorkflowApp = () => {
             'High volume impacts turnaround times',
           ],
           supportChannels: [],
-          channelDescription: 'No contact channels at this time (internal review process)',
+          channelDescription: 'No contact channels at this time — internal review process only.',
           branches: [
             {
               id: 'cnr',
@@ -163,7 +163,7 @@ const GeminiWorkflowApp = () => {
                 'Coordinate with law firms on case requirements',
               ],
               supportChannels: ['email', 'inbound'],
-              channelDescription: 'Receive emails and calls from law offices regarding case referrals',
+              channelDescription: 'Receive inbound calls and emails from law offices regarding case referrals.',
             },
             {
               id: 'intake-assignment',
@@ -178,7 +178,7 @@ const GeminiWorkflowApp = () => {
               ],
               kpi: 'Assign cases as quickly as possible — minimize assignment delay',
               supportChannels: ['email', 'inbound'],
-              channelDescription: 'Receive case information via email from counselors and law offices, assign to specialists',
+              channelDescription: 'Receive inbound calls and emails from law offices with new case information. Reviews and enters cases into CRM, then assigns to available Case Specialists.',
             },
           ],
         },
@@ -229,7 +229,7 @@ const GeminiWorkflowApp = () => {
                 'Coordinate with other departments as needed',
               ],
               supportChannels: ['inbound', 'outbound', 'email', 'sms'],
-              channelDescription: 'Inbound calls from injured workers, outbound calls to insurance carriers, adjusters & schools, emails, SMS with injured workers (both inbound & outbound)',
+              channelDescription: 'Inbound calls from injured workers. Outbound calls to insurance carriers, adjusters, schools, and injured workers. Email communication with all parties. Inbound & outbound SMS with injured workers.',
             },
             {
               id: 'rtw',
