@@ -203,8 +203,8 @@ const GeminiWorkflowApp = () => {
             'Formalize claims for timely processing',
             'Manage ongoing client communication throughout the process',
           ],
-          supportChannels: [],
-          channelDescription: 'No contact channels at this level',
+          supportChannels: ['inbound', 'outbound', 'email', 'sms'],
+          channelDescription: 'Inbound calls from injured workers. Outbound calls to insurance carriers, adjusters, schools, and injured workers. Email communication with all parties. Inbound & outbound SMS with injured workers.',
           scorecard: [
             { metric: 'Outbound Calls', category: 'Zoom', target: '> 345', weight: '10%' },
             { metric: 'Backlog #', category: 'Zoom', target: '< 25', weight: '20%' },
