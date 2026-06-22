@@ -351,20 +351,6 @@ const LegalIntakeWorkflow = () => {
               <p className="text-slate-500 mt-3 text-base">
                 Inbound response • Intake &amp; qualification • CRM documentation • Routing • Follow-up &amp; conversion
               </p>
-              <div className="flex flex-wrap gap-3 mt-4">
-                <span className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full bg-blue-100 text-blue-800 border border-blue-200">
-                  📍 Monterrey — Amalga Group
-                </span>
-                <span className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full bg-teal-100 text-teal-800 border border-teal-200">
-                  🕐 CST | 8 AM–7 PM + Weekend rotation
-                </span>
-                <span className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full bg-amber-100 text-amber-800 border border-amber-200">
-                  👥 4 Specialists | Go-live: July 13
-                </span>
-                <span className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full bg-purple-100 text-purple-800 border border-purple-200">
-                  🌐 English C1 | Bilingual EN/ES seats
-                </span>
-              </div>
             </div>
           </div>
         </div>
