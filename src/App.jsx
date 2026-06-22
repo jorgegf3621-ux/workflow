@@ -9,7 +9,20 @@ const NAV_TABS = [
 ];
 
 const AppShell = ({ children }) => {
-  const [activePage, setActivePage] = useState('operations');
+  const [path, setPath] = useState(window.location.pathname);
+
+  const navigate = (to) => {
+    window.history.pushState({}, '', to);
+    setPath(to);
+  };
+
+  useEffect(() => {
+    const onPop = () => setPath(window.location.pathname);
+    window.addEventListener('popstate', onPop);
+    return () => window.removeEventListener('popstate', onPop);
+  }, []);
+
+  const isIntake = path === '/intake' || path === '/intake/';
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-slate-100 to-slate-50">
@@ -29,25 +42,28 @@ const AppShell = ({ children }) => {
       <div className="sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm px-6 py-3">
         <div className="max-w-5xl mx-auto flex items-center gap-2">
           <span className="text-slate-500 text-xs font-semibold uppercase tracking-widest mr-4">Gemini Legal</span>
-          {NAV_TABS.map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActivePage(tab.id)}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${
-                activePage === tab.id
-                  ? 'bg-slate-900 text-white shadow-md'
-                  : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
-              }`}
-            >
-              <span>{tab.emoji}</span>
-              <span>{tab.label}</span>
-            </button>
-          ))}
+          {NAV_TABS.map((tab) => {
+            const active = tab.id === 'intake' ? isIntake : !isIntake;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => navigate(tab.id === 'intake' ? '/intake' : '/')}
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${
+                  active
+                    ? 'bg-slate-900 text-white shadow-md'
+                    : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+                }`}
+              >
+                <span>{tab.emoji}</span>
+                <span>{tab.label}</span>
+              </button>
+            );
+          })}
         </div>
       </div>
 
       <div className="flex h-[calc(100vh-57px)] gap-4 p-4">
-        {activePage === 'operations' ? children : <LegalIntakeWorkflow />}
+        {isIntake ? <LegalIntakeWorkflow /> : children}
       </div>
     </div>
   );
