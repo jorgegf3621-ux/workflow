@@ -3,55 +3,21 @@ import { ChevronDown, MessageCircle, Phone, Mail, MessageSquare } from 'lucide-r
 import LegalIntakeWorkflow from './LegalIntakeWorkflow';
 import './index.css';
 
-const NAV_TABS = [
-  { id: 'operations', label: 'Operations Workflow', emoji: '⚖️', description: 'Case Initiation → Vouchers → Support' },
-  { id: 'intake', label: 'Legal Intake Workflow', emoji: '📋', description: 'Response → Qualification → Conversion' },
-];
-
-const AppShell = ({ children }) => {
-  const [activePage, setActivePage] = useState('operations');
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-slate-100 to-slate-50">
-      <style>{`
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
-        .step-accordion { animation: slideDown 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
-        @keyframes slideDown {
-          from { opacity: 0; max-height: 0; transform: translateY(-10px); }
-          to { opacity: 1; max-height: 2000px; transform: translateY(0); }
-        }
-        .draggable-ball { cursor: grab; user-select: none; transition: filter 0.2s ease-out; }
-        .draggable-ball:active { cursor: grabbing; filter: drop-shadow(0 12px 24px rgba(0,0,0,0.35)); }
-        .draggable-ball:hover { filter: drop-shadow(0 6px 16px rgba(0,0,0,0.25)); }
-      `}</style>
-
-      {/* Top navigation */}
-      <div className="sticky top-0 z-50 bg-white border-b border-slate-200 shadow-sm px-6 py-3">
-        <div className="max-w-5xl mx-auto flex items-center gap-2">
-          <span className="text-slate-500 text-xs font-semibold uppercase tracking-widest mr-4">Gemini Legal</span>
-          {NAV_TABS.map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActivePage(tab.id)}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${
-                activePage === tab.id
-                  ? 'bg-slate-900 text-white shadow-md'
-                  : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
-              }`}
-            >
-              <span>{tab.emoji}</span>
-              <span>{tab.label}</span>
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <div className="flex h-[calc(100vh-57px)] gap-4 p-4">
-        {activePage === 'operations' ? children : <LegalIntakeWorkflow />}
-      </div>
+const AppShell = ({ children }) => (
+  <div className="min-h-screen bg-gradient-to-br from-slate-50 via-slate-100 to-slate-50">
+    <style>{`
+      body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+      .step-accordion { animation: slideDown 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+      @keyframes slideDown {
+        from { opacity: 0; max-height: 0; transform: translateY(-10px); }
+        to { opacity: 1; max-height: 2000px; transform: translateY(0); }
+      }
+    `}</style>
+    <div className="flex h-screen gap-4 p-4">
+      {children}
     </div>
-  );
-};
+  </div>
+);
 
 const GeminiWorkflowApp = () => {
   const [expandedStep, setExpandedStep] = useState(null);
@@ -655,7 +621,7 @@ const GeminiWorkflowApp = () => {
 
 const App = () => (
   <AppShell>
-    <GeminiWorkflowApp />
+    <LegalIntakeWorkflow />
   </AppShell>
 );
 
