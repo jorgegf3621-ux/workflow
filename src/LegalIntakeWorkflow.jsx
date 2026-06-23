@@ -429,20 +429,6 @@ const LegalIntakeWorkflow = () => {
                                     </div>
                                   )}
 
-                                  {/* Bottlenecks */}
-                                  {step.bottlenecks && step.bottlenecks.length > 0 && (
-                                    <div className="bg-red-50 border-l-4 border-red-600 p-4 rounded-lg">
-                                      <p className="text-sm font-bold text-red-900 mb-2">⚠️ Common Bottlenecks</p>
-                                      <ul className="space-y-1">
-                                        {step.bottlenecks.map((bn, i) => (
-                                          <li key={i} className="text-sm text-red-800 flex gap-2">
-                                            <span className="flex-shrink-0">•</span>
-                                            {bn}
-                                          </li>
-                                        ))}
-                                      </ul>
-                                    </div>
-                                  )}
 
                                   {/* Scorecard */}
                                   {step.scorecard && (
