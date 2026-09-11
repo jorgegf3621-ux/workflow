@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { ChevronDown, MessageCircle, Phone, Mail, MessageSquare } from 'lucide-react';
+import { ArrowDown, ChevronDown, FileCheck2, GitBranch, Mail, MessageCircle, MessageSquare, Phone, Scale, ShieldCheck } from 'lucide-react';
 import LegalIntakeWorkflow from './LegalIntakeWorkflow';
 import './index.css';
 
@@ -375,6 +375,68 @@ const GeminiWorkflowApp = () => {
     },
   ];
 
+  const legalFlow = [
+    {
+      id: 'referral',
+      department: 'Intake',
+      title: 'Referral & case opening',
+      detail: 'Receives the referral, captures the claimant and incident facts, and opens the matter in the CRM.',
+      color: 'border-blue-200 bg-blue-50',
+      icon: FileCheck2,
+    },
+    {
+      id: 'assignment',
+      department: 'Case Assignment',
+      title: 'Conflict & eligibility check',
+      detail: 'Validates the referral, checks conflicts, jurisdiction, claim type, capacity, and assigns the case team.',
+      color: 'border-indigo-200 bg-indigo-50',
+      icon: ShieldCheck,
+      gate: 'Legal gate: the attorney or authorized legal team confirms the matter can be accepted and handled.',
+    },
+    {
+      id: 'evidence',
+      department: 'UOS + Record Retrieval',
+      title: 'Notice & evidence collection',
+      detail: 'Sends the required notice, researches addresses, requests medical and employment records, and tracks responses.',
+      color: 'border-teal-200 bg-teal-50',
+      icon: FileCheck2,
+    },
+    {
+      id: 'review',
+      department: 'Record Review + EDR',
+      title: 'Evidence quality & legal sufficiency',
+      detail: 'Reviews completeness, resolves provider or invoice discrepancies, and documents CNR or additional-record needs.',
+      color: 'border-emerald-200 bg-emerald-50',
+      icon: Scale,
+      gate: 'Decision: sufficient evidence to proceed? If no, return to Record Retrieval or document CNR.',
+    },
+    {
+      id: 'benefit',
+      department: 'Vouchers + RTW',
+      title: 'Benefit or claim processing',
+      detail: 'Obtains signatures, verifies benefit eligibility, follows up with the injured worker, and coordinates with insurers.',
+      color: 'border-amber-200 bg-amber-50',
+      icon: FileCheck2,
+    },
+    {
+      id: 'legal-review',
+      department: 'Attorney / Case Team',
+      title: 'Legal review & next action',
+      detail: 'Reviews the assembled file, deadlines, liability and evidence posture, then authorizes the next legal or operational action.',
+      color: 'border-violet-200 bg-violet-50',
+      icon: Scale,
+      gate: 'Decision: escalate, cure a deficiency, negotiate, litigate, or close according to the matter strategy.',
+    },
+    {
+      id: 'resolution',
+      department: 'Case Team + OSS',
+      title: 'Resolution, notice & closure',
+      detail: 'Coordinates the outcome, records the decision, communicates with the parties, and closes or reopens the matter with an audit trail.',
+      color: 'border-slate-200 bg-slate-100',
+      icon: ShieldCheck,
+    },
+  ];
+
   const channelTypes = [
     { value: 'inbound', label: 'Inbound Call', icon: Phone, color: 'bg-blue-100 border-blue-300 text-blue-900' },
     { value: 'outbound', label: 'Outbound Call', icon: Phone, color: 'bg-green-100 border-green-300 text-green-900' },
@@ -467,6 +529,63 @@ const GeminiWorkflowApp = () => {
                 </div>
               </div>
             </div>
+
+            <section className="mb-16 rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-sm" aria-labelledby="legal-flow-title">
+              <div className="flex items-start justify-between gap-4 mb-7">
+                <div>
+                  <p className="text-xs font-bold tracking-widest uppercase text-violet-700">Process map</p>
+                  <h2 id="legal-flow-title" className="text-2xl font-bold text-slate-900 mt-1">Department sequence with legal control points</h2>
+                  <p className="text-sm text-slate-600 mt-2 max-w-2xl">The operational handoffs are connected to the legal decisions that determine whether a matter advances, returns for more work, escalates, or closes.</p>
+                </div>
+                <div className="hidden sm:flex items-center gap-2 rounded-lg bg-white px-3 py-2 text-xs font-semibold text-slate-600 border border-slate-200">
+                  <Scale size={16} className="text-violet-700" />
+                  Attorney-controlled decisions
+                </div>
+              </div>
+
+              <div className="space-y-3">
+                {legalFlow.map((node, index) => {
+                  const Icon = node.icon;
+                  const isDecision = Boolean(node.gate);
+                  return (
+                    <React.Fragment key={node.id}>
+                      <div className={`relative rounded-xl border p-4 ${node.color}`}>
+                        <div className="flex items-start gap-3">
+                          <div className="rounded-lg bg-white p-2 text-slate-700 shadow-sm">
+                            <Icon size={19} />
+                          </div>
+                          <div className="min-w-0 flex-1">
+                            <div className="flex flex-wrap items-center gap-2">
+                              <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500">{node.department}</span>
+                              {isDecision && <span className="inline-flex items-center gap-1 rounded-full bg-violet-100 px-2 py-1 text-[10px] font-bold uppercase tracking-wide text-violet-800"><GitBranch size={12} /> Control point</span>}
+                            </div>
+                            <h3 className="mt-1 text-base font-bold text-slate-900">{node.title}</h3>
+                            <p className="mt-1 text-sm leading-relaxed text-slate-600">{node.detail}</p>
+                            {node.gate && <p className="mt-3 border-l-2 border-violet-400 pl-3 text-xs font-semibold leading-relaxed text-violet-900">{node.gate}</p>}
+                          </div>
+                        </div>
+                      </div>
+                      {index < legalFlow.length - 1 && (
+                        <div className="flex items-center gap-2 pl-6 text-slate-400" aria-hidden="true">
+                          <div className="h-5 w-px bg-slate-300" />
+                          <ArrowDown size={16} />
+                          <span className="text-[10px] font-semibold uppercase tracking-wider">handoff</span>
+                        </div>
+                      )}
+                    </React.Fragment>
+                  );
+                })}
+              </div>
+
+              <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                <div className="rounded-lg border border-rose-200 bg-rose-50 p-3 text-xs leading-relaxed text-rose-900">
+                  <strong>Return loop:</strong> incomplete records, missing signatures, unresolved discrepancies, or a deadline risk return the matter to the responsible department with a documented task.
+                </div>
+                <div className="rounded-lg border border-violet-200 bg-violet-50 p-3 text-xs leading-relaxed text-violet-900">
+                  <strong>Escalation path:</strong> urgent deadlines, medical emergencies, conflicts, high-value exposure, or legal strategy questions go to the attorney or designated supervisor before action.
+                </div>
+              </div>
+            </section>
 
             <div className="relative" ref={timelineRef}>
               <div className="absolute left-7 top-0 bottom-0 w-1.5 bg-gradient-to-b from-teal-600 via-blue-600 via-green-600 to-amber-600 rounded-full"></div>
