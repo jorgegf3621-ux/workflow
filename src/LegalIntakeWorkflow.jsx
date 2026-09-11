@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ChevronDown, Phone, Mail, MessageSquare } from 'lucide-react';
 
-const LegalIntakeWorkflow = () => {
+const LegalIntakeWorkflow = ({ onBack }) => {
   const [expandedStep, setExpandedStep] = useState(null);
   const [expandedBranch, setExpandedBranch] = useState(null);
 
@@ -341,6 +341,15 @@ const LegalIntakeWorkflow = () => {
       <div className="max-w-4xl mx-auto p-8">
         {/* Header */}
         <div className="mb-16">
+          {onBack && (
+            <button
+              onClick={onBack}
+              className="flex items-center gap-1.5 text-sm font-semibold text-slate-500 hover:text-slate-900 transition-colors mb-6"
+            >
+              <span aria-hidden="true">←</span>
+              <span>Operations Workflow</span>
+            </button>
+          )}
           <div className="flex items-start gap-4 mb-6">
             <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-700 rounded-xl shadow-lg flex items-center justify-center flex-shrink-0">
               <span className="text-white text-4xl">📋</span>

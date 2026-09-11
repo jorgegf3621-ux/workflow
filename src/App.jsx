@@ -65,7 +65,7 @@ const AppShell = ({ children }) => {
       )}
 
       <div className={`flex gap-4 p-4 ${isIntake ? 'h-screen' : 'h-[calc(100vh-57px)]'}`}>
-        {isIntake ? <LegalIntakeWorkflow /> : children}
+        {isIntake ? <LegalIntakeWorkflow onBack={() => navigate('/')} /> : children}
       </div>
     </div>
   );
@@ -133,18 +133,18 @@ const GeminiWorkflowApp = () => {
         {
           id: 'edr',
           title: 'EDR — Early Dispute Resolution',
-          subtitle: 'Sends invoices for copy service fees to insurance carriers',
-          description: 'EDR operates between Record Retrieval steps, sending invoices for copy service fees directly to insurance carriers for records obtained.',
+          subtitle: 'Verifies copy service fee invoice information and resolves discrepancies with carriers',
+          description: 'EDR operates between Record Retrieval steps, verifying that invoice information for copy service fees is correct. When there is doubt or something appears incorrect, EDR follows up with the insurance carrier to verify the information, and in some cases must contact the adjuster directly to confirm it.',
           activities: [
-            'Send invoices for copy service fees to insurance carriers',
-            'Ensure accurate billing for records obtained',
-            'Track invoice status and follow up on pending submissions',
+            'Verify that copy service fee invoice information is correct',
+            'Follow up with insurance carriers to verify information when there is doubt or a discrepancy',
+            'Contact the adjuster directly when the carrier cannot resolve the discrepancy',
             'Resolve any billing disputes with carriers',
           ],
           kpi: '> 35 cases processed per day',
           bottlenecks: [],
           supportChannels: ['outbound'],
-          channelDescription: 'Outbound calls to insurance carriers to send and follow up on copy service fee invoices.',
+          channelDescription: 'Outbound calls to insurance carriers, and to adjusters when necessary, to verify copy service fee invoice information.',
         },
         {
           id: 'rrv',
